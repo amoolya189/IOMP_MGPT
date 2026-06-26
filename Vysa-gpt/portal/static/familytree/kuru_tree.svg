@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1600"
+     height="2000"
+     viewBox="0 0 1600 2000"
+     font-family="Arial">
+
+  <!-- ====== TITLE ====== -->
+  <text x="650" y="30" font-size="22" font-weight="bold" fill="blue">
+    Kuru family tree
+  </text>
+
+  <!-- ====== ANCESTOR LINE ====== -->
+  <!-- Kuru -->
+  <g class="person" id="Kuru" data-name="Kuru">
+    <rect x="720" y="60" width="120" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="780" y="80" text-anchor="middle">Kuru</text>
+  </g>
+
+  <!-- Vertical lineage -->
+  <line x1="780" y1="90" x2="780" y2="130" stroke="black" stroke-dasharray="5,5"/>
+
+  <!-- Anasawan -->
+  <g class="person" id="Anasawan" data-name="Anasawan">
+    <rect x="700" y="130" width="160" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="780" y="150" text-anchor="middle">Anasawan</text>
+  </g>
+
+  <line x1="780" y1="160" x2="780" y2="200" stroke="black" stroke-dasharray="5,5"/>
+
+  <!-- Bheemasena -->
+  <g class="person" id="Bheemasena" data-name="Bheemasena">
+    <rect x="700" y="200" width="160" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="780" y="220" text-anchor="middle">Bheemasena</text>
+  </g>
+
+  <line x1="780" y1="230" x2="780" y2="270" stroke="black" stroke-dasharray="5,5"/>
+
+  <!-- Pratisravas -->
+  <g class="person" id="Pratisravas" data-name="Pratisravas">
+    <rect x="700" y="270" width="160" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="780" y="290" text-anchor="middle">Pratisravas</text>
+  </g>
+
+  <line x1="780" y1="300" x2="780" y2="340" stroke="black" stroke-dasharray="5,5"/>
+
+  <!-- Pratipa -->
+  <g class="person" id="Pratipa" data-name="Pratipa">
+    <rect x="720" y="340" width="120" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="780" y="360" text-anchor="middle">Pratipa</text>
+  </g>
+
+  <line x1="780" y1="370" x2="780" y2="420" stroke="black" stroke-dasharray="5,5"/>
+
+  <!-- ====== SHANTANU & WIVES ====== -->
+
+  <!-- Ganga -->
+  <g class="person" id="Ganga" data-name="Ganga">
+    <rect x="450" y="420" width="120" height="30" fill="white" stroke="red" stroke-width="2"/>
+    <text x="510" y="440" text-anchor="middle">Gangā</text>
+  </g>
+
+  <!-- Shantanu -->
+  <g class="person" id="Shantanu" data-name="Shantanu">
+    <rect x="720" y="420" width="120" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="780" y="440" text-anchor="middle">Shāntanu</text>
+  </g>
+
+  <!-- Satyavati -->
+  <g class="person" id="Satyavati" data-name="Satyavati">
+    <rect x="950" y="420" width="140" height="30" fill="white" stroke="red" stroke-width="2"/>
+    <text x="1020" y="440" text-anchor="middle">Satyavati</text>
+  </g>
+
+  <!-- Marriage lines -->
+  <line x1="570" y1="435" x2="720" y2="435" stroke="black" stroke-dasharray="5,5"/>
+  <line x1="840" y1="435" x2="950" y2="435" stroke="black" stroke-dasharray="5,5"/>
+
+  <!-- ====== CHILDREN OF SHANTANU ====== -->
+
+  <!-- Bhishma -->
+  <g class="person" id="Bhishma" data-name="Bhishma">
+    <rect x="450" y="520" width="120" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="510" y="540" text-anchor="middle">Bhishma</text>
+  </g>
+
+  <!-- Chitrangada -->
+  <g class="person" id="Chitrangada" data-name="Chitrangada">
+    <rect x="650" y="520" width="150" height="30" fill="white" stroke="blue" stroke-width="2"/>
+    <text x="725" y="540" text-anchor="middle">Chitrāngada</text>
+  </g>
+
+  <!-- Vichitravirya -->
+<g class="person" id="Vichitravirya" data-name="Vichitravirya">
+  <rect x="900" y="520" width="160" height="30"
+        fill="white" stroke="blue" stroke-width="2"/>
+  <text x="980" y="540" text-anchor="middle">Vichitravirya</text>
+</g>
+
+<!-- Marriage lines FIRST -->
+<line x1="980" y1="550" x2="770" y2="600"
+      stroke="black" stroke-dasharray="5,5" stroke-width="2"/>
+
+<line x1="980" y1="550" x2="1190" y2="600"
+      stroke="black" stroke-dasharray="5,5" stroke-width="2"/>
+
+<!-- Ambika -->
+<g class="person" id="Ambika" data-name="Ambika">
+  <rect x="700" y="540" width="140" height="30"
+        fill="white" stroke="red" stroke-width="2"/>
+  <text x="770" y="540" text-anchor="middle">Ambikā</text>
+</g>
+
+<!-- Ambalika -->
+<g class="person" id="Ambalika" data-name="Ambalika">
+  <rect x="1120" y="540" width="140" height="30"
+        fill="white" stroke="red" stroke-width="2"/>
+  <text x="1190" y="540" text-anchor="middle">Ambālikā</text>
+</g>
+
+  <!-- Parent line -->
+  <line x1="780" y1="450" x2="780" y2="500" stroke="black"/>
+  <line x1="510" y1="500" x2="980" y2="500" stroke="black"/>
+  <line x1="510" y1="500" x2="510" y2="520" stroke="black"/>
+  <line x1="725" y1="500" x2="725" y2="520" stroke="black"/>
+  <line x1="980" y1="500" x2="980" y2="520" stroke="black"/>
+
+  <!-- ====== (Pandavas / Kauravas section continues next) ====== -->
+  <!-- ===== DHṚTARĀṢṬRA & GĀNDHĀRĪ ===== -->
+
+<g class="person" id="Dhritarashtra" data-name="Dhritarashtra">
+  <rect x="450" y="650" width="170" height="30" fill="white" stroke="blue" stroke-width="2"/>
+  <text x="535" y="670" text-anchor="middle">Dhritarāṣṭra</text>
+</g>
+
+<g class="person" id="Gandhari" data-name="Gandhari">
+  <rect x="650" y="650" width="140" height="30" fill="white" stroke="red" stroke-width="2"/>
+  <text x="720" y="670" text-anchor="middle">Gāndhārī</text>
+</g>
+
+<!-- Marriage -->
+<line x1="620" y1="665" x2="650" y2="665" stroke="black" stroke-dasharray="5,5"/>
+<!-- ===== KAURAVAS ===== -->
+
+<!-- Parent line -->
+<line x1="535" y1="680" x2="535" y2="720" stroke="black"/>
+<line x1="420" y1="720" x2="650" y2="720" stroke="black"/>
+
+<!-- Duryodhana -->
+<g class="person" id="Duryodhana" data-name="Duryodhana">
+  <rect x="400" y="720" width="150" height="30" fill="yellow" stroke="black" stroke-width="2"/>
+  <text x="475" y="740" text-anchor="middle">Duryodhana</text>
+</g>
+
+<!-- Dussala -->
+<g class="person" id="Dussala" data-name="Dussala">
+  <rect x="570" y="720" width="130" height="30" fill="yellow" stroke="black" stroke-width="2"/>
+  <text x="635" y="740" text-anchor="middle">Dussalā</text>
+</g>
+
+<!-- Dushasana -->
+<g class="person" id="Dushasana" data-name="Dushasana">
+  <rect x="740" y="720" width="150" height="30" fill="yellow" stroke="black" stroke-width="2"/>
+  <text x="815" y="740" text-anchor="middle">Duśśāsana</text>
+</g>
+
+<!-- 98 Sons -->
+<g class="person" id="KauravasOthers" data-name="Other Kauravas">
+  <rect x="920" y="720" width="150" height="30" fill="yellow" stroke="black" stroke-width="2"/>
+  <text x="995" y="740" text-anchor="middle">(98 sons)</text>
+</g>
+<!-- ===== PĀṆḌU & WIVES ===== -->
+
+<g class="person" id="Pandu" data-name="Pandu">
+  <rect x="1000" y="650" width="120" height="30" fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1060" y="670" text-anchor="middle">Pāṇḍu</text>
+</g>
+
+<g class="person" id="Kunti" data-name="Kunti">
+  <rect x="860" y="650" width="120" height="30" fill="white" stroke="red" stroke-width="2"/>
+  <text x="920" y="670" text-anchor="middle">Kuntī</text>
+</g>
+
+<g class="person" id="Madri" data-name="Madri">
+  <rect x="1150" y="650" width="120" height="30" fill="white" stroke="red" stroke-width="2"/>
+  <text x="1210" y="670" text-anchor="middle">Mādrī</text>
+</g>
+
+<!-- Marriage lines -->
+<line x1="980" y1="665" x2="1000" y2="665" stroke="black" stroke-dasharray="5,5"/>
+<line x1="1120" y1="665" x2="1150" y2="665" stroke="black" stroke-dasharray="5,5"/>
+<!-- ===== PĀṆḌAVAS ===== -->
+
+<line x1="1060" y1="680" x2="1060" y2="760" stroke="black"/>
+<line x1="860" y1="760" x2="1260" y2="760" stroke="black"/>
+
+<!-- Yudhishthira -->
+<g class="person" id="Yudhishthira" data-name="Yudhishthira">
+  <rect x="820" y="760" width="160" height="30" fill="lightgreen" stroke="green" stroke-width="2"/>
+  <text x="900" y="780" text-anchor="middle">Yudhishthira</text>
+</g>
+
+<!-- Bhima -->
+<g class="person" id="Bhima" data-name="Bhima">
+  <rect x="1000" y="760" width="120" height="30" fill="lightgreen" stroke="green" stroke-width="2"/>
+  <text x="1060" y="780" text-anchor="middle">Bhīma</text>
+</g>
+
+<!-- Arjuna -->
+<g class="person" id="Arjuna" data-name="Arjuna">
+  <rect x="1140" y="760" width="120" height="30" fill="lightgreen" stroke="green" stroke-width="2"/>
+  <text x="1200" y="780" text-anchor="middle">Arjuna</text>
+</g>
+
+<!-- Nakula -->
+<g class="person" id="Nakula" data-name="Nakula">
+  <rect x="1320" y="760" width="120" height="30" fill="lightgreen" stroke="green" stroke-width="2"/>
+  <text x="1380" y="780" text-anchor="middle">Nakula</text>
+</g>
+
+<!-- Sahadeva -->
+<g class="person" id="Sahadeva" data-name="Sahadeva">
+  <rect x="1480" y="760" width="140" height="30" fill="lightgreen" stroke="green" stroke-width="2"/>
+  <text x="1550" y="780" text-anchor="middle">Sahadeva</text>
+</g>
+<!-- ===== ABHIMANYU LINE ===== -->
+
+<g class="person" id="Abhimanyu" data-name="Abhimanyu">
+  <rect x="1200" y="860" width="140" height="30" fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1270" y="880" text-anchor="middle">Abhimanyu</text>
+</g>
+
+<line x1="1200" y1="790" x2="1200" y2="860" stroke="black"/>
+
+<g class="person" id="Uttara" data-name="Uttara">
+  <rect x="1380" y="860" width="120" height="30" fill="white" stroke="red" stroke-width="2"/>
+  <text x="1440" y="880" text-anchor="middle">Uttarā</text>
+</g>
+
+<line x1="1340" y1="875" x2="1380" y2="875" stroke="black" stroke-dasharray="5,5"/>
+
+<g class="person" id="Parikshit" data-name="Parikshit">
+  <rect x="1200" y="950" width="140" height="30" fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1270" y="970" text-anchor="middle">Parīkṣit</text>
+</g>
+
+<line x1="1270" y1="890" x2="1270" y2="950" stroke="black"/>
+
+<g class="person" id="Janamejaya" data-name="Janamejaya">
+  <rect x="1200" y="1040" width="160" height="30" fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1280" y="1060" text-anchor="middle">Janamejaya</text>
+</g>
+
+<line x1="1280" y1="980" x2="1280" y2="1040" stroke="black"/>
+
+<!-- ===== SATYAVATĪ – PARĀŚARA – VYĀSA ===== -->
+
+<!-- Parāśara -->
+<g class="person" id="Parashara" data-name="Parashara">
+  <rect x="1300" y="420" width="140" height="30"
+        fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1370" y="440" text-anchor="middle">Parāśara</text>
+</g>
+
+<!-- Dashed relation: Satyavatī to Parāśara -->
+<line x1="1090" y1="435" x2="1300" y2="435"
+      stroke="black" stroke-dasharray="5,5"/>
+
+<!-- Vyāsa -->
+<g class="person" id="Vyasa" data-name="Vyasa">
+  <rect x="1300" y="500" width="120" height="30"
+        fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1360" y="520" text-anchor="middle">Vyāsa</text>
+</g>
+
+<!-- Vertical line: Parāśara → Vyāsa -->
+<line x1="1370" y1="450" x2="1370" y2="500"
+      stroke="black"/>
+<!-- ===== PARĪKṢIT – MĀDRAVATĪ – JANAMEJAYA ===== -->
+
+<!-- Mādravatī -->
+<g class="person" id="Madravati" data-name="Madravati">
+  <rect x="1380" y="950" width="150" height="30"
+        fill="white" stroke="red" stroke-width="2"/>
+  <text x="1455" y="970" text-anchor="middle">Mādravatī</text>
+</g>
+
+<!-- Dashed marriage -->
+<line x1="1340" y1="965" x2="1380" y2="965"
+      stroke="black" stroke-dasharray="5,5"/>
+
+<!-- Janamejaya -->
+<g class="person" id="Janamejaya" data-name="Janamejaya">
+  <rect x="1200" y="1040" width="160" height="30"
+        fill="white" stroke="blue" stroke-width="2"/>
+  <text x="1280" y="1060" text-anchor="middle">Janamejaya</text>
+</g>
+
+<!-- Vertical line: Parīkṣit → Janamejaya -->
+<line x1="1270" y1="980" x2="1270" y2="1040"
+      stroke="black"/>
+
+</svg>
+

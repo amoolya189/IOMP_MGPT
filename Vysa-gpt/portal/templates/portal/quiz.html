@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahabharata Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+.title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.quiz-box, .result-box {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.question {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+.options button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #0f3460;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.options button:hover { background: #e94560; }
+.correct { background: green !important; }
+.wrong { background: red !important; }
+#nextBtn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #e94560;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+.progress { margin-bottom: 15px; }
+.result-box { display: none; text-align: center; }
+.badge { font-size: 1.5rem; margin: 10px 0; }
+.desc { margin: 10px 0; opacity: 0.8; }
+button.restart {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #00adb5;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="title">Mahabharata Quiz Challenge</div>
+
+    <div class="quiz-box">
+        <div class="progress" id="progress"></div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <button id="nextBtn">Next</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2 id="finalScore"></h2>
+        <div class="badge" id="title"></div>
+        <div class="desc" id="description"></div>
+        <div class="desc" id="suggestion"></div>
+        <button class="restart" onclick="restartQuiz()">Play Again</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    {q:"Who is the author of Mahabharata?",o:["Valmiki","Vyasa","Kalidasa","Tulsidas"],a:1},
+    {q:"Pandavas' mother?",o:["Gandhari","Kunti","Draupadi","Subhadra"],a:1},
+    {q:"Who burned Khandava forest?",o:["Arjuna & Krishna","Bhima","Duryodhana","Karna"],a:0},
+    {q:"Who won Draupadi?",o:["Arjuna","Bhima","Karna","Yudhishthira"],a:0},
+    {q:"Game that caused exile?",o:["Chess","Dice","Cards","Archery"],a:1},
+    {q:"Exile duration?",o:["10","12+1","14","7"],a:1},
+    {q:"Brihannala was?",o:["Krishna","Arjuna","Bhima","Nakula"],a:1},
+    {q:"Who killed Keechaka?",o:["Arjuna","Bhima","Krishna","Sahadeva"],a:1},
+    {q:"First Kaurava commander?",o:["Drona","Bhishma","Karna","Shalya"],a:1},
+    {q:"Who brought Bhishma down?",o:["Arjuna","Shikhandi","Krishna","Drona"],a:1},
+    {q:"Who killed Drona?",o:["Arjuna","Yudhishthira","Dhrishtadyumna","Bhima"],a:2},
+    {q:"Who killed Karna?",o:["Arjuna","Bhima","Krishna","Nakula"],a:0},
+    {q:"Who killed Duryodhana?",o:["Arjuna","Bhima","Krishna","Sahadeva"],a:1},
+    {q:"Ashwatthama used which of these?",o:["Brahmastra","Gada","Sword","Bow"],a:0},
+    {q:"Who survived?",o:["All died","Parikshit","None","Abhimanyu"],a:1},
+    {q:"Who narrated Gita?",o:["Vyasa","Krishna","Arjuna","Sanjaya"],a:1},
+    {q:"Who was Abhimanyu's father?",o:["Bhima","Arjuna","Krishna","Yudhishthira"],a:1},
+    {q:"Who Entered Chakravyuha?",o:["Abhimanyu","Bhima","Karna","Drona"],a:0},
+    {q:"who was the King before war?",o:["Dhritarashtra","Pandu","Yudhishthira","Duryodhana"],a:0},
+    {q:"who was the King after war?",o:["Arjuna","Bhima","Yudhishthira","Krishna"],a:2}
+];
+
+let currentQ=0, score=0;
+
+const questionEl=document.getElementById("question");
+const optionsEl=document.getElementById("options");
+const nextBtn=document.getElementById("nextBtn");
+const progress=document.getElementById("progress");
+
+function loadQuestion(){
+    let q=quizData[currentQ];
+    questionEl.innerText=q.q;
+    progress.innerText=`Question ${currentQ+1} of ${quizData.length}`;
+    optionsEl.innerHTML="";
+
+    q.o.forEach((opt,i)=>{
+        let btn=document.createElement("button");
+        btn.innerText=opt;
+        btn.onclick=()=>selectAnswer(btn,i);
+        optionsEl.appendChild(btn);
+    });
+}
+
+function selectAnswer(btn,i){
+    let correct=quizData[currentQ].a;
+    Array.from(optionsEl.children).forEach(b=>b.disabled=true);
+
+    if(i===correct){ btn.classList.add("correct"); score++; }
+    else{
+        btn.classList.add("wrong");
+        optionsEl.children[correct].classList.add("correct");
+    }
+    nextBtn.style.display="block";
+}
+
+nextBtn.onclick=()=>{
+    currentQ++;
+    nextBtn.style.display="none";
+    if(currentQ<quizData.length) loadQuestion();
+    else showResult();
+};
+
+function showResult(){
+    document.querySelector(".quiz-box").style.display="none";
+    document.getElementById("resultBox").style.display="block";
+
+    let title="",desc="",suggest="";
+
+    if(score>=18){
+        title="🏆 Mahabharata Scholar (Vyasa)";
+        desc="You possess deep knowledge of the epic.";
+        suggest="Explore advanced topics like Dharma and Karma.";
+    } else if(score>=14){
+        title="⚔️ Warrior Mind (Arjuna)";
+        desc="You are strategic and focused.";
+        suggest="Learn about Chakravyuha and war strategies.";
+    } else if(score>=10){
+        title="📘 Dharma Learner";
+        desc="You are on the right path.";
+        suggest="Study stories of Yudhishthira and Bhishma.";
+    } else{
+        title="🌱 Beginner";
+        desc="Start your Mahabharata journey.";
+        suggest="Begin with Adi Parva basics.";
+    }
+
+    document.getElementById("finalScore").innerText=`Score: ${score}/${quizData.length}`;
+    document.getElementById("title").innerText=title;
+    document.getElementById("description").innerText=desc;
+    document.getElementById("suggestion").innerText=suggest;
+}
+
+function restartQuiz(){
+    currentQ=0; score=0;
+    document.querySelector(".quiz-box").style.display="block";
+    document.getElementById("resultBox").style.display="none";
+    loadQuestion();
+}
+
+loadQuestion();
+</script>
+</body>
+</html>

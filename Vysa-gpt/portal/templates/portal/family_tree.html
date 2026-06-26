@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kuru Dynasty Family Tree</title>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: "default",
+  securityLevel: "loose"
+});
+
+</script>
+
+<style>
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f4f6f9;
+}
+
+.wrapper{
+  display:flex;
+  height:100vh;
+}
+
+.container{
+  width:70%;
+  overflow:auto;
+  padding:20px;
+  background:white;
+}
+
+.details-panel{
+  width:30%;
+  background:#eef2f7;
+  padding:20px;
+  border-left:3px solid #ccc;
+}
+
+.details-panel img{
+  width:100%;
+  border-radius:10px;
+}
+
+.mermaid div{
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Kuru Dynasty Family Tree</h2>
+
+<div class="wrapper">
+
+<div class="container">
+<div class="mermaid">
+graph TD
+
+Kuru --> Anaswan
+Anaswan --> Bheemasena1
+Bheemasena1["Bheemasena (1)"] --> Pratisravas
+Pratisravas --> Pratipa
+Pratipa --> Shantanu
+
+%% Marriage 0A
+Shantanu -.-> Marriage0A:::marriage
+Ganga -.-> Marriage0A:::marriage
+Marriage0A --> Bhishma
+
+%% Marriage 0B
+Shantanu -.-> Marriage0B:::marriage
+Satyavati -.-> Marriage0B:::marriage
+Marriage0B --> Chitrangada
+Marriage0B --> Vichitravirya
+
+%% Marriage 03
+Parashara -.-> Marriage03:::marriage
+Satyavati -.-> Marriage03:::marriage
+Marriage03 --> Vyasa
+
+%% Marriage 0C
+Vichitravirya -.-> Marriage0C:::marriage
+Ambika -.-> Marriage0C:::marriage
+Marriage0C --> Dhritarashtra
+
+%% Marriage 0D
+Vichitravirya -.-> Marriage0D:::marriage
+Ambalika -.-> Marriage0D:::marriage
+Marriage0D --> Pandu
+
+%% Marriage 1
+Dhritarashtra -.-> Marriage1:::marriage
+Gandhari -.-> Marriage1:::marriage
+Gandhari --- Shakuni:::bro
+Marriage1 --> Duryodhana
+Marriage1 --> Dushasana
+Marriage1 --> Dussala
+Marriage1 --> OtherSons
+
+OtherSons["98 Other Sons"]
+
+%% Marriage 2
+Pandu -.-> Marriage2:::marriage
+Kunti -.-> Marriage2:::marriage
+Madri -.-> Marriage2:::marriage
+Marriage2 --> Yudhishthira
+Marriage2 --> Bhima
+Marriage2 --> Arjuna
+Marriage2 --> Nakula
+Marriage2 --> Sahadeva
+Marriage2 --> Karna
+
+%% Draupadi Marriage (common wife of Pandavas)
+Yudhishthira -.-> MarriageD:::marriage
+Bhima -.-> MarriageD:::marriage
+Arjuna -.-> MarriageD:::marriage
+Nakula -.-> MarriageD:::marriage
+Sahadeva -.-> MarriageD:::marriage
+Draupadi -.-> MarriageD:::marriage
+
+%% Marriage 3
+Arjuna -.-> Marriage3:::marriage
+Subhadra -.-> Marriage3:::marriage
+Marriage3 --> Abhimanyu
+
+Abhimanyu -.-> Marriage4:::marriage
+Uttara -.-> Marriage4:::marriage
+Marriage4 --> Parikshit
+
+%% Marriage 5
+Parikshit -.-> Marriage5:::marriage
+Madravati -.-> Marriage5:::marriage
+Marriage5 --> Janamejaya
+
+classDef marriage stroke:red,stroke-width:2px;
+classDef bro stroke:yellow,stroke-width:2px;
+
+%% Click Events
+click Kuru showDetails
+click Anaswan showDetails
+click Bheemasena1 showDetails
+click Pratisravas showDetails
+click Pratipa showDetails
+click Shantanu showDetails
+click Ganga showDetails
+click Satyavati showDetails
+click Bhishma showDetails
+click Chitrangada showDetails
+click Vichitravirya showDetails
+click Parashara showDetails
+click Vyasa showDetails
+click Ambika showDetails
+click Ambalika showDetails
+click Dhritarashtra showDetails
+click Gandhari showDetails
+click Shakuni showDetails
+click Duryodhana showDetails
+click Dushasana showDetails
+click Dussala showDetails
+click Pandu showDetails
+click Kunti showDetails
+click Madri showDetails
+click Yudhishthira showDetails
+click Bhima showDetails
+click Arjuna showDetails
+click Nakula showDetails
+click Sahadeva showDetails
+click Karna showDetails
+click Draupadi showDetails
+click Subhadra showDetails
+click Abhimanyu showDetails
+click Uttara showDetails
+click Parikshit showDetails
+click Madravati showDetails
+click Janamejaya showDetails
+</div>
+</div>
+
+<div class="details-panel">
+  <img id="personImage" src="">
+  <h2 id="personName">Click a Person</h2>
+  <p id="personDesc">Details will appear here...</p>
+</div>
+
+</div>
+
+<script>
+
+const peopleData = {
+
+Kuru:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx9Pzb6x4B--OaqwSKIPq30eb4W2cOMlPGHQ&s ",desc:"Kuru is the name of the ancestor of the clan of the Kurus in the Mahabharata. He was the son of Samvarana and of Tapati, the daughter of the Sun.In the literature, Kuru is an ancestor of Pandu and his descendants, the Pandavas, and also of Dhritarashtra and his descendants, the Kauravas. This latter name derived as a patronym from Kuru, is only used for the descendants of Dhritarashtra.King Kuru had two wives named Shubhangi and Vahini. He had a son named Viduratha with Shubhangi, and five sons with Vahini, named Ashvavat, Abhishyat, Citraratha, Muni, and Janamejaya.[42][43] Due to his merits and great ascetic practices the region Kurujangal was named after him. It has also been known as Kurukshetra since ancient Vedic times"},
+Anaswan:{img:" ",desc:"A minor ancestor in the lineage of the Puru dynasty and the Kuru clan.He appears in genealogical lists of the Kuru kings, specifically as a descendant in the line that leads toward Shantanu, Bhishma, and the Pandavas/Kauravas."},
+Bheemasena1:{img:"https://hindupost.in/wp-content/uploads/2020/04/bhima-pandava.png",desc:"Bheemasena (Bhima) is the second Pandava brother in the Mahabharata, renowned as the strongest, most heroic warrior, and an incarnation of Vayu (the wind god). He is characterized by immense physical strength, unwavering loyalty to Krishna, and a fierce, yet righteous nature, often described as terrifying or formidable to his enemies."},
+Pratisravas:{img:"",desc:"Pratīsravas is the father of Pratipa, and therefore:Great-grandfather of Bhishma.Ancestor of the Kauravas and Pandavas"},
+Pratipa:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSroXY-4T7_kRXzFQ1tZ77hDADy7lgmI1lcxA&s",desc:"He is a legendary king in Hinduism. He is the king of Hastinapura and a member of the Lunar dynasty. He is the father of Shantanu and the grandfather of Bhishma,Chitrangada, and Vichitravirya. The king is mentioned in the Hindu epic Mahabharata."},
+Shantanu:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdG8INn9yUhgTlG75L_KbahnswFpPJcHKb1Q&s",desc:"Shantanu is a character in the ancient Hindu epic Mahabharata. He was the King of Kuru kingdom with his capital at Hastinapura.He was a descendant of the Bharata race, a forebear of the lineage of the Chandravamsha, the father of Bhishma and the great-grandfather of the Pandavas and the Kauravas.Shantanu was the youngest son of King Pratipa of Hastinapura and had been born during the king's later years. His eldest brother, Devapi, had leprosy, and had given up his rightful claim before becoming a hermit. The middle son, Bahlika (or Vahlika), abandoned his birth kingdom, and had started living with his maternal uncle in Balkh, subsequently inheriting his kingdom. Shantanu, thus, ascended the throne of Hastinapura."},
+Ganga:{img:"https://www.srigaurangashram.in/images/ganga.jpg",desc:"Ganga is the personification of the river Ganges, who is worshipped by Hindus as the goddess of purification and forgiveness. Known by many names, Ganga is often depicted as a fair, beautiful woman, riding a divine crocodile-like creature called the makaraIn Hinduism, Ganga is seen as a mother to humanity. Pilgrims immerse the ashes of their kin in the river Ganga, which is considered by them to bring the souls (purified spirits) closer to moksha, the liberation from the cycle of life and death. Festivals like Ganga Dussehra and Ganga Jayanti are celebrated in her honour at several sacred places, which lie along the banks of the Ganges, including Gangotri, Haridwar, Prayagraj, Varanasi and Kali Ghat in Kolkata.  "},
+Satyavati:{img:"https://whereicanbreathe.wordpress.com/wp-content/uploads/2021/06/0e1ffecdb1792685cfc224f3086e4fc48587799037954482573.jpg",desc:"Satyavati is a character in the ancient Hindu epic Mahabharata. She was the queen of the Kuru kingdom, married to king Shantanu of Hastinapura, and is a great-grandmother of the Pandava and Kaurava princes. She is also the mother of the seer Vyasa, author of the epic. Her story appears in the Mahabharata, the Harivamsa, and the Devi Bhagavata Purana."},
+Bhishma:{img:"https://vatvriksh.com/wp-content/uploads/2025/05/bhishma-on-his-death-bed-in-mahabharata-war.webp",desc:"Bhishma also known as Pitāmaha, Gangāputra, and Devavrata, is a central figure in the Hindu epic Mahabharata. He was a statesman and military commander of the ancient Kuru kingdom. Renowned for his wisdom, valor, skill in battle and unwavering principles, Bhishma served as the supreme commander of the Kaurava forces during the first ten days of the Kurukshetra War until his fall."},
+Chitrangada:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTht0Oto4KKDhDS_rUwSv1mATJW2IA2mhoTzQ&s",desc:"Chitrāngada  was the king of Kuru Mahajanapada with his capital Hastinapura. He belonged to the Lunar Dynasty of Bharata Tribe He was the elder son of Shantanu and Satyavati, who ascended the throne of Hastinapura after his father's death.Following the wishes of queen Satyavati, Bhishma had placed Chitrangada on the throne of the kingdom of the Kurus after Shantanu's departure. Chitrangada was a great warrior and defeated many powerful enemies and Asuras. But soon he developed pride and began disrespecting everyone.Bhishma who tried to correct his young brother's bad behaviour was ignored and rendered powerless on account of his oath to perpetually serve the Kuru King. Finally, the king of the Gandharvas, who was his namesake, came to challenge him saying there could be only one Chitrangada which was himself. A fierce battle took place between the two warriors on the bank of the river Hiranyavati, lasting three years. In the end the king of the Gandharvas defeated the Kuru king and killed him.After having performed the rites of the dead, Bhishma immediately consecrated Chitrangada's younger brother Vichitravirya to the kingdom."},
+Vichitravirya:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2md_d8M5YNoC0Ia_R9lcRACtVhbEv_hs8fg&s",desc:"Vichitravirya  is a figure in the Mahabharata, where he is featured as a Kuru king.According to the Hindu epic, he is the youngest son of Queen Satyavati and King Shantanu, and the de jure grandfather of the Pandavas and the Kauravas. He is also the half-brother of Krishna Dvaipayana Vyasa and Bhishma.Vichitravirya has an elder brother named Chitrāngada, whom his half-brother Bhishma placed on the throne of the kingdom of the Kurus after Shantanu's death; he is a mighty warrior, but the king of the Gandharvas defeats and kills him at the end of a long battle. Thereafter, Bhishma consecrates Vichitravirya, who is still a child, as the new king"},
+Parashara:{img:"https://img1.wsimg.com/isteam/ip/a33e6f26-7310-45a9-80dd-3c7e1be143b0/E7snlZzVgAMmnlV.jPEG/:/cr=t:0%25,l:9.8%25,w:80.39%25,h:100%25/rs=w:600,h:800,cg:true",desc:"Parashara (Sanskrit: पराशर; IAST: Parāśara) was a maharishi and the author of many ancient Hindu texts. He is accredited as the author of the first Purana, the Vishnu Purana, before his son Vyasa wrote it in its present form. He was the grandson of the sage Vasishtha and the son of the sage Shakti.. He is famed for his immense yogic powers, creating a dense mist to meet Satyavati, with whom he had a son (Vyasa) and bestowed her with a pleasant fragrance. Parashara is the progenitor of Vyasa, who compiled the Mahabharata. Through this connection, he is the great-grandfather of both the Kauravas and the Pandavas.Parashara is a profound author and rishi of Vedic texts, specifically known as the author of the Brihat Parashara Hora Shastra, "},
+Vyasa:{img:"https://www.hinduamerican.org/wp-content/uploads/2020/09/968px-Ganesha_write_Mahabharata-e1599849933890.jpg",desc:"Vyasa is a rishi (sage) with a prominent role in most Hindu traditions.He is also known as Veda Vyasa,(Vyāsa) means compiler or arranger and also separation or division.Other meanings include split,differentiate,or describe.It is also a title given to a holy sage or a pious learned man and is applied to persons distinguished for their writings.Vyāsa is regarded as the author of the Mahabharata, a major epic of Hindu literature.The first section of the Mahābhārata states that Gaṇesha wrote the text to Vyasa's dictation,but this is regarded by scholars as a later interpolation to the epic and this part of the story is also excluded in the Critical Edition of the Mahābhārata.The five Paṇḍava brothers of the junior line of the Kuru royal house being the ultimate victors, thus India's cultural heroes, Vyāsa's relationship with the winners in this kinship war of cousin against cousin is as chronicler who sired the father of the victors. These five protagonists are the surrogate sons of Pānḍu, sired by various gods on behalf of this Kuru king whom Vyāsa himself fathered 'under Niyoga practice' in place of an younger brother who died heirless, at the behest of his mother Satyavati. Vyāsa also sired the father of the vanquished, he was certainly the surgeon who put the hundred brothers of antagonist cousins into incubation, and as they are only said to be sired by a boon he conferred on their mother, there's some possibility that he is also their biological sire himself.Hence Vyāsa's authorship of the Mahābhārata is by way of biography of his own family including its adoptees. This was the struggle between his own ex officio grandsons.And it is in the wake of producing this purportedly historical, smriti Mahābhārata as well as 'compiling' the essential "},
+Ambika:{img:"https://blog.sagarworld.com/wp-content/uploads/2022/04/75.-750x536.jpg",desc:"Ambika is the queen of Kuru kingdom in the Hindu epic Mahabharata. The second daughter of Kashya, the King of Kashi and Kausalya, she is abducted by Bhishma during her svayamvara, and becomes the wife of Vichitravirya, the King of Hastinapura. Ambika is the mother of Dhritarashtra and the grandmother of the Kauravas.Along with her sisters, Amba and Ambalika, Ambika was taken by force by Bhishma from their svayamvara, the latter having challenged and defeated the assembled royalty. He presented them to his step-mother, Satyavati, for marriage to Vichitravirya. While Amba expressed her desire not to marry him as she was in love with a king named Salva, Ambika and Ambalika married Vichitravirya, and spent seven years in their husband's company. Vichitravirya was afflicted with tuberculosis, and subsequently died from the disease.After Vichitravirya's death, he left behind no heirs. His mother Satyavati sent for her first born, the rishi Vyasa. She asked him to sire children with the widowed queens of Vichitravirya according to the prevalent custom of Niyoga. Vyasa had come from years of intense meditation, and as a result, looked tremendously unkempt. When he approached Ambika, she closed her eyes in fear. As a result, the blind Dhritrashtra was born from their union."},
+Ambalika:{img:"https://blog.sagarworld.com/wp-content/uploads/2022/04/75.-750x536.jpg",desc:"Ambalikais the queen of Kuru kingdom in the Hindu epic Mahabharata. The youngest daughter of Kashya, the King of Kashi and Kausalya,[1] Ambalika is abducted by Bhishma during her svayamvara ceremony, and becomes the wife of Vichitravirya, the King of Hastinapura. She is the mother of Pandu and the grandmother of Pandavas.Along with her sisters, Amba and Ambika, Ambalika was taken by force by Bhishma during their svayamvara, the latter having challenged and defeated the assembled royalty. He presented them to Satyavati for marriage to Vichitravirya.[3] Ambalika and her sister spent seven years in their husband's company. Vichitravirya was afflicted with tuberculosis, and died from the disease.After Vichitravirya's death, since he left no heirs, his mother Satyavati sent for her first born, the sage Vyasa. She asked him to father children with the widowed queens of Vichitravirya, according to the prevalent custom of niyoga. Vyasa had come from years of intense meditation, and as a result, he looked tremendously unkempt. When he approached Ambalika, she turned pale in fear. Her son Pandu, as the result of the niyoga, was born with a pale appearance."},
+Dhritarashtra:{img:"https://www.meghnaunni.com/wp-content/uploads/2020/05/dhritharashtra-mahabharat.jpg",desc:"Dhritarashtra (Sanskrit: धृतराष्ट्र, romanized: Dhr̥tarāṣṭra) was a ruler of the ancient Kuru kingdom, featured as a central character in the Hindu epic Mahabharata. He is also attested in the Yajurveda, where he is acknowledged as the son of King Vichitravirya,According to the Mahabharata, Dhritarashtra’s birth was the result of the ancient practice of Niyoga. After Vichitravirya died childless, his half-brother Vyasa fathered children with Vichitravirya’s widows to continue the Kuru lineage. Dhritarashtra was born blind to Vichitravirya’s elder queen, Ambika. Despite being the eldest, his blindness disqualified him from inheriting the throne, which passed to his younger half-brother, Pandu. However, after Pandu renounced the throne and retired to the forest, Dhritarashtra assumed kingship of the Kuru kingdom, albeit as a nominal ruler heavily influenced by his grandsire, Bhishma, and his eldest son, Duryodhana.Dhritarashtra married Gandhari, a devoted wife who, in a gesture of solidarity, blindfolded herself for life to share in her husband's blindness. Together, they had one hundred sons, known as the Kauravas, and a daughter, Dushala. Throughout his reign, Dhritarashtra struggled with the conflicting roles of father and king. His deep affection for Duryodhana, often clouded his judgment, leading him to overlook his son's misdeeds and fail to curb the injustices inflicted upon their cousins, the Pandavas."},
+Gandhari:{img:"https://i0.wp.com/glorioushinduism.com/wp-content/uploads/2017/09/gandhari-and-dhitrastra-1.jpg?fit=1024%2C676&ssl=1",desc:"Gandhari, is a major character in the ancient Hindu epic Mahabharata. She is introduced as a princess of the Gandhara Kingdom and later becomes the queen of the Kuru Kingdom. The daughter of King Subala, her marriage is arranged with Dhritarashtra, the blind king of Kuru, and in a symbolic gesture of solidarity, she voluntarily blindfolds herself for life. Through miraculous intervention, she becomes the mother of the one hundred sons collectively known as the Kauravas, the eldest of whom, Duryodhana, serves as one of the principal antagonists of the narrative.Besides her hundred sons, Gandhari also has a daughter, Dushala. Her brother, Shakuni, becomes a central figure in aiding Duryodhana's schemes against his cousins, the Pandavas. An ardent devotee of the god Shiva, Gandhari is portrayed as a woman of great virtue and moral strength, who nonetheless struggles to dissuade her sons from their destructive path. She speaks out at pivotal moments in the narrative, including during the humiliation of Draupadi and peace talks before the Kurukshetra War. Despite condemning the actions of Duryodhana, the longstanding rivalry between the Kauravas and the Pandavas ultimately leads to the catastrophic Kurukshetra War, where all of Gandhari's sons perish."},
+Shakuni:{img:"https://www.amarchitrakatha.com/wp-content/uploads/2020/09/ShakhuniDice_865x500.jpg",desc:"Shakuni (Sanskrit: शकुनि, IAST: Śakuni, lit. 'bird') is one of the antagonists of the Hindu epic Mahabharata. He was the prince of the kingdom of Gandhara when introduced, later becoming its king after the death of his father, Subala. He was the brother of Gandhari and the maternal uncle of the Kauravas.Portrayed as crafty and devious, Shakuni supported his nephews, particularly the eldest, Duryodhana, in plotting against their cousins—the Pandavas. It was Shakuni who played the game of dice against Yudhishthira, one of the seminal events in the epic. Using his skills of manipulation and foul play, he won the game twice, causing the exile of the Pandavas and the consolidation of the power of the Kauravas.[2] During the Kurukshetra War between the Kauravas and the Pandavas, Shakuni was killed by the youngest Pandava, Sahadeva. According to the Mahabharata, Shakuni was an incarnation of the entity named Dvapara, who presides over Dvapara Yuga, the third age in the Hindu cycle of time. He was born as a result of fury of the gods, born to destroy righteousness"},
+Duryodhana:{img:"https://www.bhagavatam-katha.com/wp-content/uploads/2024/08/duryodhana.jpeg",desc:"Duryodhana (Sanskrit: दुर्योधन, IAST: Duryodhana), also known as Suyodhana, is the primary antagonist of the Hindu epic Mahabharata. He is the eldest of the Kauravas, the hundred sons of King Dhritarashtra and Queen Gandhari of Kuru dynasty. Born through a miraculous manner, his birth is accompanied by ill-omens. Duryodhana grows up in Hastinapura and later becomes its crown prince. Driven by innate selfishness, jealousy, and hostility towards his cousins—the five Pandava brothers—Duryodhana frequently plots against them, aided by his principal allies: his trickster uncle Shakuni, his loyal friend Karna, his devoted brother Dushasana and his blind and indulgent father Dhritarashtra.Duryodhana's envy culminates in the infamous dice game, where he humiliates Draupadi, the queen of the Pandavas. This incident provokes Bhima, the second Pandava, to vow that he will one day smash Duryodhana's thigh. Later, with the help of Shakuni, Duryodhana tricks the Pandavas into relinquishing their kingdom and forces them into exile. Even after the Pandavas complete their thirteen-year exile, he refuses to restore their kingdom, directly triggering the outbreak of the Kurukshetra War.During the war, Duryodhana is supported by renowned warriors such as Bhishma, Drona, Karna and Shalya. As the conflict reaches its climax and most of his key supporters have fallen, Duryodhana flees the battlefield and hides within a magically fortified lake. When the Pandavas discover him, he agrees to a final duel, selecting his main rival Bhima as his opponent. Although Duryodhana has superior skills, he is ultimately defeated when Bhima strikes him illegally on the thigh. Gravely wounded and humiliated, Duryodhana remains defiant to the end, appointing his friend Ashvatthaman as commander of the remaining Kaurava forces. Following a final act of vengeance orchestrated by Ashvatthaman, Duryodhana succumbs to his injuries"},
+Dushasana:{img:"https://upload.wikimedia.org/wikipedia/commons/0/03/Disrobing_of_Draupadi_by_M_V_Dhurandhar_%28cropped%29.jpg",desc:"Dushasana , is a prominent character in the ancient Hindu epic Mahabharata. He is the second eldest of the hundred Kaurava brothers, born to King Dhritarashtra and Queen Gandhari of the Kuru dynasty. As the younger brother and close confidant of Duryodhana, the chief antagonist of the epic, Dushasana plays a significant role in many key events leading up to and during the Kurukshetra War.Dushasana is best known for his active involvement in the humiliation of Draupadi, the wife of the Pandavas, during the infamous dice game episode, where he dragged her in the royal court and unsuccessfully attempted to disrobe her. His actions earn him the wrath of Draupadi and the Pandavas, particularly Bhima, who vows to kill Dushasana—a vow that is ultimately fulfilled during the war by tearing apart his chest.When Dhritarashtra's queen Gandhari's pregnancy continued for an unusually long time, she beat her womb in frustration and out of jealousy towards Kunti, the wife of Pandu, who had just given birth to Yudhishthira (the eldest of the five Pandava brothers). At this, a hardened mass of grey-coloured flesh emerged from her womb. Gandhari was devastated and called upon Vyasa, the great sage who had prophesied she would give birth to one hundred sons, to redeem his words.Vyasa divided the ball of flesh into one hundred and one equal pieces, each piece no bigger than a thumb. He put them in pots of milk, which were sealed and buried in the earth for two years. At the end of the second year, the first pot was opened and Duryodhana emerged. Within a period of one month all the other 99 sons and single daughter of Dhritarashtra were born. Dushasana was the second after Duryodhana."},
+Dussala:{img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Duhshala_with_her_grandson.jpg",desc:"Dussala, was the princess of Hastinapura, and the only daughter of King Dhritarashtra and Queen Gandhari in the Hindu epic Mahabharata.[1] She was born after the birth of her Kaurava brothers and her paternal half-sibling, Yuyutsu. She is married to Jayadratha, the king of Sindhu. She had a son named Suratha. She was very beautiful like her mother. Being the only princess of the most mighty Empire, she was very much loved by all the members of the royal family, particularly her elder brother, Duryodhana.When, Jayadratha tried to kidnap and molest Draupadi and failed, some of the Pandavas decided to slay him. But on Yudhishthira's plea to prevent Dushala from becoming a widow, they left him alone, just shaving his head. Later, Jayadratha played a vital role in getting Abhimanyu, the son of Arjuna, killed in the Kurukhsetra war to satiate his vengeance. But Arjuna, with the help of Krishna, decapitated him.When, Jayadratha tried to kidnap and molest Draupadi and failed, some of the Pandavas decided to slay him. But on Yudhishthira's plea to prevent Dushala from becoming a widow, they left him alone, just shaving his head. Later, Jayadratha played a vital role in getting Abhimanyu, the son of Arjuna, killed in the Kurukhsetra war to satiate his vengeance. But Arjuna, with the help of Krishna, decapitated him."},
+Pandu:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9p26RHzlZWjV2zBgp-YgkrFIJkizeTyg-bA&s",desc:"Pandu was a king of Hastinapura and a central figure in the lineage of the Kuru dynasty. He was the son of the sage Vyasa and Queen Ambalika. Though younger than Dhritarashtra, he became king due to his brother’s blindness. Pandu was known for his strength, skill in warfare, and adherence to dharma. He married Kunti and Madri and ruled successfully for a time. However, he was cursed by a sage that he would die if he engaged in physical relations with his wives. Because of this curse, he renounced the throne and retired to the forest. Through Kunti’s divine boon, he became the father of the Pandavas. Despite living as an ascetic, he longed for family life. Eventually, he forgot the curse in a moment of passion and died. His death deeply affected his family. Madri immolated herself, leaving Kunti to raise the children. Pandu’s life is seen as tragic and symbolic. His sons went on to shape the fate of the kingdom. He remains remembered as the father of the Pandavas."},
+Kunti:{img:"https://i.pinimg.com/736x/b4/08/61/b4086171924e7eac0c6d7ed53c7df4b5.jpg",desc:"Kunti was one of the most important female figures in the Mahabharata and the mother of the Pandavas. She was the daughter of King Shurasena and was adopted by Kuntibhoja. As a young woman, she received a boon that allowed her to invoke gods to bear children. Before marriage, she used this boon and gave birth to Karna, whom she abandoned. She later married Pandu and used her boon to give him sons. She invoked Dharma, Vayu, and Indra to bear Yudhishthira, Bhima, and Arjuna. She shared her boon with Madri, leading to the birth of Nakula and Sahadeva. After Pandu’s death, she raised all five Pandavas with great strength. She endured exile, hardship, and political struggle. Kunti is known for her wisdom and resilience. She revealed Karna’s true identity late in the story. Her decisions had deep emotional consequences. She stood for duty and sacrifice. She remained a guiding force for her sons. Her life reflects courage and endurance."},
+Madri:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYAh1BRLZejIy3B7LY6c2d_-BI86kYKxV58Q&s",desc:"Madri was the second wife of King Pandu and the mother of Nakula and Sahadeva. She was a princess of the Madra kingdom. Known for her beauty and grace, she was deeply loved by Pandu. Due to Pandu’s curse, she could not bear children normally. With Kunti’s permission, she used the divine boon to invoke the Ashwini twins. She gave birth to Nakula and Sahadeva, who were known for their beauty and wisdom. Madri lived with Pandu in the forest during his exile. She shared a close bond with him. One day, Pandu forgot his curse and approached her, leading to his death. Madri felt responsible for his death. Overcome with grief, she chose to commit sati on his funeral pyre. She entrusted her sons to Kunti. Her life was short but impactful. She is remembered for devotion and sacrifice. Her sons became key figures among the Pandavas."},
+Yudhishthira:{img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhU3cImPV3eqR1VCPsp99fgF_TR7I_dn996gT4pVOA6ogcGqadMatS63fRsQbNjsCiUnbH89BgdIRC0i5pSL82Zwe-q36zB_fXRz7ti_vcWYurSLna3bM4A-kMNU5ZVP8P53EXloS8dNuI/s1600-rw/Yudhistira_and_Yaksha.jpg",desc:"Yudhishthira, also known as Dharmaraja, was the eldest of the Pandavas and the son of Kunti. He was born through the invocation of the god Dharma. He is known for his unwavering commitment to truth and righteousness. As the rightful heir to the throne, he played a central role in the political conflict. He was a skilled ruler and known for his wisdom. However, his adherence to dharma sometimes led to difficult consequences. He lost his kingdom in a game of dice. This event led to the exile of the Pandavas. During exile, he remained calm and philosophical. He participated in the Kurukshetra war reluctantly. After the war, he became king of Hastinapura. His rule was marked by justice and fairness. He later performed the Ashvamedha sacrifice. At the end of his life, he undertook a journey to heaven. He symbolizes truth and moral duty."},
+Bhima:{img:"https://cdnb.artstation.com/p/assets/images/images/038/203/989/large/subhrajit-ojha-bhim-0.jpg?1622473461",desc:"Bhima was the second of the Pandavas and was known for his immense physical strength. He was the son of Vayu, the wind god. From childhood, he displayed extraordinary power. He played a major role in protecting his brothers. Bhima defeated many powerful enemies. He killed the demon Hidimba and married Hidimbi. He was also responsible for killing key Kaurava warriors. His rivalry with Duryodhana was intense. Bhima vowed to avenge the humiliation of Draupadi. He fulfilled his vow by killing Dushasana. He also defeated Duryodhana in the final battle. Despite his strength, he was loyal and emotional. He loved food and was straightforward in nature. He played a crucial role in the war. His actions ensured the victory of the Pandavas. He symbolizes strength and loyalty."},
+Arjuna:{img:"https://iskconwhitefield.org/wp-content/uploads/2025/03/arjuna-surrenders-to-krishna-752x1024-ezgif.com-optiwebp.webp",desc:"Arjuna was the third Pandava and one of the greatest warriors in the Mahabharata. He was the son of Indra, the king of gods. He was trained by the guru Drona. Arjuna excelled in archery and warfare. He won Draupadi in a contest of skill. He formed a close friendship with Krishna. On the battlefield, Krishna served as his charioteer. Arjuna was initially reluctant to fight in the war. Krishna delivered the Bhagavad Gita to guide him. Arjuna fought bravely in the Kurukshetra war. He defeated many great warriors. He killed Karna in battle. He was known for discipline and focus. Arjuna also went on various pilgrimages. He had multiple marriages, including Subhadra. He is remembered as a symbol of skill and devotion."},
+Nakula:{img:"https://upload.wikimedia.org/wikipedia/commons/8/86/Nakula_Pandava.jpg",desc:"Nakula was one of the twin sons of Madri and the Ashwini gods. He was known for his exceptional beauty. Among the Pandavas, he was skilled in swordsmanship. He was also an expert in horse care and management. Nakula was loyal to his brothers. He played a supporting role in major events. During exile, he remained steadfast and calm. He fought bravely in the Kurukshetra war. Though not as prominent as Arjuna or Bhima, he contributed significantly. He had a balanced personality. Nakula followed dharma and respected elders. He shared a strong bond with Sahadeva. He was admired for his humility. He remained dedicated to the Pandava cause. He symbolizes grace and loyalty."},
+Sahadeva:{img:"https://upload.wikimedia.org/wikipedia/commons/a/a3/One_of_the_Pandava_twins%2C_probably_Sahadeva.jpg",desc:"Sahadeva was the twin brother of Nakula and son of Madri. He was known for his intelligence and wisdom. He was believed to possess knowledge of the future. Sahadeva was skilled in astrology and strategy. He played an important advisory role. Despite his knowledge, he often remained silent due to fate. He was loyal and obedient to Yudhishthira. During exile, he supported his brothers. In the war, he fought bravely. He killed several warriors, including Shakuni. Sahadeva was calm and composed. He was respected for his intellect. He shared a close bond with Nakula. He followed dharma strictly. He symbolizes wisdom and foresight."},
+Karna:{img:"https://www.talesofsanatan.com/wp-content/uploads/2024/12/the-legend-of-karans-kavach-and-kundal-hidden-in-a-cave.webp",desc:"Karna was one of the most tragic and heroic figures in the Mahabharata. He was the son of Kunti and the sun god Surya. He was abandoned at birth and raised by a charioteer family. Despite his low status, he became a great warrior. He was a rival of Arjuna. Duryodhana supported him and made him king of Anga. Karna was known for his generosity and charity. He was loyal to Duryodhana till the end. He faced discrimination throughout his life. He possessed divine armor and earrings. These were taken from him before the war. Karna fought bravely in the Kurukshetra war. He was eventually killed by Arjuna. His true identity was revealed later. He symbolizes loyalty and tragedy."},
+Draupadi:{
+  img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVjUDVX5bo4jI-Se5TlVpmKJdygt2wY7E0H_aS7STSpFrD3zBxWwTw1fHNtXnr79ubfFcQrjCMdejl1dPYlaXC4iJwBAL4SvLZ_t80BeAV74Vlpuar2IjKFwC5wS7ICZKO1P67qPtnx6o/s1600/Draupadi+Vastraharan.jpg",
+  desc:"Draupadi (Sanskrit: द्रौपदी, romanized: draupadī, lit. 'Daughter of Drupada'), also referred to as Krishnā, Panchali and Yajnaseni, is one of the central characters of the ancient Sanskrit epic, the Mahabharata (c. 400 BCE – 400 CE). Born from a yajna (fire sacrifice) conducted by King Drupada of Panchala, she is the princess of the Panchala Kingdom and the common wife of the five Pandava brothers—Yudhishthira, Bhima, Arjuna, Nakula, and Sahadeva—in a polyandrous marriage sanctioned by divine prophecy and narratives of her previous lives. Attested as a partial incarnation of the goddess Shri, Draupadi initially serves as the queen of Indraprastha, overseeing the kingdom's finances and treasury. She is also described as a sakhi (close friend) of the god Krishna.The most notable episode featuring Draupadi takes place during the game of dice at the Kuru court. In this game, Yudhishthira, having lost Indraprastha and his freedom, wagers and loses Draupadi to his cousin Duryodhana—the leader of the Kauravas. She is forcibly dragged into the royal assembly and deemed a slave. However, she challenges the assembly, questioning the legality of being staked after one of her husbands had already forfeited his own freedom. After she is publicly humiliated by Duryodhana and his ally Karna for being married to five men, the Kaurava prince Dushasana attempts to disrobe her, but her honour is miraculously preserved, as her garment becomes endlessly extended. The Kuru king Dhritarashtra then intervenes and grants Draupadi two boons, resulting in the release of the Pandavas from bondage.Afterwards, Draupadi accompanies the Pandavas into their thirteen-year exile after they lose their kingdom to the Kauravas. In the final year of exile, Draupadi lives incognito, disguised as a maid to Queen Sudeshna of Matsya. When she is harassed by the Matsya general Kichaka, she successfully persuades Bhima to kill Kichaka.[2] After the exile, when Duryodhana refuses to restore the Pandavas' kingdom, Draupadi strongly supports the call for the Kurukshetra War, recalling the humiliations and assaults she had suffered and demanding punishment for her culprits. Although the Kauravas are slain, the war also leads to the deaths of her father, brothers, and her five sons. These sons—each born to one of the Pandavas—are collectively known by the matronymic Draupadeyas. After the Pandavas' victory, she becomes the empress of the Kuru Kingdom for thirty-six years. In the epic's conclusion, Draupadi joins the Pandavas on their final journey toward heaven, during which she is the first to fall."
+},
+Subhadra:{img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOpX6guKF0BbzTfzHakcG8khTce03LbUfwg&s",desc:"Subhadra was the sister of Krishna and the wife of Arjuna. She was a princess of the Yadava clan. Arjuna abducted and married her with Krishna’s support. She was known for her gentle nature. She gave birth to Abhimanyu. Subhadra played a supportive role in the story. She lived in Dwaraka and later with the Pandavas. She was deeply affected by Abhimanyu’s death. She cared for her grandson Parikshit. She was respected among the royal women. Her marriage strengthened alliances. She symbolizes love and devotion. Her lineage continued the Pandava line."},
+Abhimanyu:{img:"https://preview.redd.it/abhimanyu-the-warrior-who-entered-the-chakravyuh-knowing-he-v0-n773agdy7wlf1.jpeg?auto=webp&s=cae492a4746829b8aaf35a94127d557b7c8bd000",desc:"Abhimanyu was the son of Arjuna and Subhadra. He was trained in warfare from a young age. He learned the strategy to enter the Chakravyuha. However, he did not know how to exit it. During the Kurukshetra war, he bravely entered the formation. He fought many great warriors alone. He was surrounded and killed unfairly. His death was a turning point in the war. It deeply angered the Pandavas. Abhimanyu is remembered for courage and sacrifice. He was young but fearless. His son Parikshit was born after his death. He symbolizes youthful heroism."},
+Uttara:{img:"https://upload.wikimedia.org/wikipedia/commons/e/e4/Uttara_crying_for_her_husband.jpg",desc:"Uttara was the daughter of King Virata and wife of Abhimanyu. She became part of the Pandava family through marriage. She was widowed at a young age. During the war, she was pregnant with Abhimanyu’s child. Her unborn child was attacked by Ashwatthama. Krishna saved the child. That child was Parikshit. Uttara lived to see her son become king. She represents resilience and continuity. Her life was marked by tragedy and hope. She preserved the lineage of the Pandavas."},
+Parikshit:{img:"https://res.cloudinary.com/jerrick/image/upload/c_scale,f_jpg,q_auto/6727a0795b40d1001d4501bb.webp",desc:"Parikshit was the son of Abhimanyu and Uttara. He was the sole surviving heir of the Pandavas. He was saved in the womb by Krishna. He became king after Yudhishthira. His reign was peaceful and prosperous. He is known in later texts like the Bhagavata Purana. He was cursed to die by a sage’s son. He died from a snake bite. His story leads to the narration of sacred texts. He ensured the continuation of the dynasty. He symbolizes renewal and legacy."},
+Madravati:{img:"",desc:"Madravati is mentioned as the wife of King Parikshit. She was queen during his reign. She belonged to a royal lineage. She gave birth to Janamejaya. Her role is less detailed in the epic. She represents continuation of the royal family. She supported the kingdom’s stability. Her presence ensured succession. She is part of the later Kuru lineage. She is remembered mainly through her son."},
+Janamejaya:{img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/King_janamejaya.jpg/250px-King_janamejaya.jpg",desc:"Janamejaya was the son of Parikshit and Madravati. He became king after his father’s death. He is famous for performing the snake sacrifice. This was done to avenge his father’s death. During this sacrifice, the Mahabharata was narrated. The sage Vaishampayana recited the epic. Janamejaya played a key role in preserving the story. His reign is linked with the transmission of knowledge. He symbolizes the continuation of tradition. His actions ensured the Mahabharata’s legacy."}
+
+};
+
+function showDetails(id){
+  if(peopleData[id]){
+    document.getElementById("personImage").src = peopleData[id].img;
+    document.getElementById("personName").innerText = id;
+    document.getElementById("personDesc").innerText = peopleData[id].desc;
+  }
+}
+
+</script>
+<h3>
+  yellow represents same generation siblings<br>
+  red represents marriages with dotted arrows<br>
+  sub trees represent next generation
+</h3>
+</body>
+</html>

@@ -1,0 +1,247 @@
+{% extends "portal/base.html" %}
+{% block title %}Home — Mahabharata Portal{% endblock %}
+
+{% block content %}
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    color: #fff;
+    background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url("https://www.youngisthan.in/wp-content/uploads/2018/11/title-pic-4-970x546.jpg") no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 100px 20px 40px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    background: linear-gradient(to right, #ffd700, #ffae00);
+
+    /* FIX */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    letter-spacing: 3px;
+}
+
+.hero p {
+    opacity: 0.8;
+    margin-top: 15px;
+    font-size: 1.2rem;
+}
+
+/* GRID */
+.modules {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 40px;
+}
+
+/* CARD */
+.module-card {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 280px;
+    text-align: center;
+    transition: 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* glowing border */
+.module-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(45deg, gold, orange);
+
+    /* FIX */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+.module-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255,215,0,0.7);
+}
+
+/* TEXT */
+.module-card h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.module-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* BUTTON */
+.btn-custom {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(45deg, #ffd700, #ffae00);
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-custom:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px gold;
+}
+
+/* QUOTE */
+.quote {
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* ANIMATION */
+.module-card {
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from {opacity:0; transform: translateY(40px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+#particles-js {
+    pointer-events: none;
+}
+
+.module-card::before {
+    pointer-events: none;
+}
+
+.module-card {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-custom {
+    position: relative;
+    z-index: 2;
+}
+
+</style>
+
+<div id="particles-js"></div>
+
+<div class="hero">
+    <h1 id="typing"></h1>
+    <p>Explore the wisdom, lineage, and timeless teachings of the epic.</p>
+</div>
+
+<div class="modules">
+
+    <div class="module-card">
+        <h2>Q&A Chatbot</h2>
+        <p>Ask anything about characters, war, and philosophy.</p>
+        <a href="{% url 'chatbot' %}">
+            <button class="btn-custom">Start Asking</button>
+        </a>
+    </div>
+
+    <div class="module-card">
+        <h2>ARJUNA: The Fighter</h2>
+        <p>Battle enemies, dodge kings, and score high.</p>
+        <a href="{% url 'game' %}">
+            <button class="btn-custom">Play Game</button>
+        </a>
+    </div>
+
+    <div class="module-card">
+        <h2>Family Tree</h2>
+        <p>Explore royal lineage & relationships.</p>
+        <a href="{% url 'family_tree' %}">
+            <button class="btn-custom">View Tree</button>
+        </a>
+    </div>
+
+    <div class="module-card">
+        <h2>Quiz</h2>
+        <p>Test your Mahabharata knowledge.</p>
+        <a href="{% url 'quiz' %}">
+            <button class="btn-custom">Start Quiz</button>
+        </a>
+    </div>
+
+</div>
+
+<div class="quote" id="quoteBox"></div>
+
+<!-- SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<script>
+// typing effect
+const text = "Mahabharata Knowledge Portal";
+let i = 0;
+function typing() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 70);
+    }
+}
+typing();
+
+// quotes
+const quotes = [
+"Dharma protects those who protect it.",
+"The soul is eternal.",
+"Time destroys all beings.",
+"Perform your duty without attachment."
+];
+
+let q = 0;
+setInterval(() => {
+    document.getElementById("quoteBox").innerText = quotes[q];
+    q = (q + 1) % quotes.length;
+}, 3000);
+
+// particles
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 70 },
+    size: { value: 3 },
+    move: { speed: 1 },
+    line_linked: { enable: true }
+  }
+});
+</script>
+
+{% endblock %}

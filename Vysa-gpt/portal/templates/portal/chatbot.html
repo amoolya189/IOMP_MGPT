@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mahabharata Temple Archives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Georgia", serif;
+            background: url("https://images.unsplash.com/photo-1603228254193-1db6b3b60c69")
+                        no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* -------- HEADER -------- */
+        header {
+            background: linear-gradient(to right, #5a3e1b, #7a5526, #5a3e1b);
+            color: #f6e4b8;
+            padding: 16px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            border-bottom: 4px solid #c9a44c;
+        }
+
+        header span {
+            display: block;
+            font-size: 13px;
+            font-style: italic;
+            color: #e6d3a3;
+        }
+
+        /* -------- CHAT AREA -------- */
+        #chatbox {
+            flex: 1;
+            padding: 20px;
+            margin-right: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+            line-height: 1.5;
+        }
+
+        .user {
+            align-self: flex-end;
+            background: linear-gradient(#6b4b2a, #4d331a);
+            color: #fff3d6;
+        }
+
+        .bot {
+            align-self: flex-start;
+            background: linear-gradient(#e8d7b1, #cdb07a);
+            color: #3b2a14;
+        }
+
+        .typing {
+            font-style: italic;
+            color: #f0e1b8;
+        }
+
+        /* -------- INPUT -------- */
+        footer {
+            display: flex;
+            padding: 12px;
+            margin-right: 260px;
+            background: linear-gradient(#5a3e1b, #3f2b14);
+            border-top: 3px solid #c9a44c;
+        }
+
+        footer input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 16px;
+            background: #f7ecd0;
+        }
+
+        footer button {
+            margin-left: 10px;
+            padding: 10px 18px;
+            background: #c9a44c;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* -------- AVATAR -------- */
+        #avatar {
+            position: fixed;
+            bottom: 95px;
+            left: 15px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 4px;
+            background: radial-gradient(circle, #f5e6b3, #c9a44c);
+            box-shadow: 0 0 14px rgba(201,164,76,0.9);
+            z-index: 999;
+        }
+
+        #avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #avatar::before {
+            content: "";
+            position: absolute;
+            inset: -22px;
+            border-radius: 50%;
+            background: conic-gradient(#f6e6b3, #c9a44c, #fff1c1, #c9a44c);
+            opacity: 0.55;
+            filter: blur(2px);
+            z-index: -1;
+            animation: auraRotate 14s linear infinite;
+        }
+
+        .avatar-thinking {
+            animation: pulse 1.4s infinite;
+        }
+
+        @keyframes pulse {
+            50% { box-shadow: 0 0 28px rgba(201,164,76,1); }
+        }
+
+        @keyframes auraRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        /* -------- SIDEBAR (STATIC) -------- */
+        #storyFrame {
+            position: fixed;
+            top: 80px;
+            right: 0;
+            width: 260px;
+            height: calc(100vh - 80px);
+            background: rgba(255, 246, 210, 0.9);
+            border-left: 4px solid #c9a44c;
+            box-shadow: -3px 0 12px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            font-style: italic;
+            font-weight: bold;
+            color: #3b2a14;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    🛕 Mahabharata Temple Archives
+    <span>॥ Dharma preserved in eternal stone ॥</span>
+</header>
+
+<div id="chatbox"></div>
+
+<div id="avatar">
+    <img id="avatarImg" src="" alt="Sage">
+</div>
+
+<div id="storyFrame">
+    <span id="storyText">Unfolding an episode from the epic…</span>
+</div>
+
+<footer>
+    <input id="question" placeholder="Ask from the sacred epic..."
+           onkeydown="if(event.key==='Enter') ask()">
+    <button onclick="ask()">Ask</button>
+</footer>
+
+<script>
+/* -------- AVATARS -------- */
+const avatars = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROeubsbbc0gkmWMymIIBqSzshPenXzVn0p2Q&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfj60yqyl1YZokv9k_60ws1kW-j5RJQkOsug&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbtba1CtyLxbYlYMMqq09LNsif1QTE2LjpMA&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROJ7b2lZ_aX_Nr1bJzDksoME-YaOw_yc2WEA&s"
+];
+
+let a = 0;
+const avatarImg = document.getElementById("avatarImg");
+setInterval(() => {
+    avatarImg.src = avatars[a];
+    a = (a + 1) % avatars.length;
+}, 5000);
+avatarImg.src = avatars[0];
+
+/* -------- SIDEBAR PHRASES -------- */
+const phrases = [
+    "Unfolding an episode from the epic…",
+    "Searching the battlefield of Kurukshetra…",
+    "Tracing events from the Itihasa…",
+    "Listening to echoes of Dharma and Adharma…",
+    "Consulting the timeless wisdom of Vyasa…",
+    "Revisiting the vows of the Pandavas…",
+    "Witnessing fate unfold through karma…",
+    "Recalling verses sung in ancient halls…"
+];
+
+let p = 0;
+const storyText = document.getElementById("storyText");
+
+setInterval(() => {
+    storyText.style.opacity = 0;
+    setTimeout(() => {
+        storyText.textContent = phrases[p];
+        storyText.style.opacity = 1;
+        p = (p + 1) % phrases.length;
+    }, 600);
+}, 5000);
+
+/* -------- CHATBOT -------- */
+async function ask() {
+    const input = document.getElementById("question");
+    const chatbox = document.getElementById("chatbox");
+    const avatar = document.getElementById("avatar");
+    const q = input.value.trim();
+    if (!q) return;
+
+    chatbox.innerHTML += `<div class="message user">${q}</div>`;
+    input.value = "";
+    chatbox.scrollTop = chatbox.scrollHeight;
+
+    const typing = document.createElement("div");
+    typing.className = "typing";
+    typing.textContent = "॥ Turning the sacred leaves of the Mahabharata… ॥";
+    chatbox.appendChild(typing);
+
+    avatar.classList.add("avatar-thinking");
+
+    try {
+        const r = await fetch("/api/ask/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: q })
+        });
+        const data = await r.json();
+
+        typing.remove();
+        avatar.classList.remove("avatar-thinking");
+        chatbox.innerHTML += `<div class="message bot">${data.answer}</div>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+    } catch {
+        typing.textContent = "॥ The scriptures remain silent… ॥";
+        avatar.classList.remove("avatar-thinking");
+    }
+}
+</script>
+
+</body>
+</html>

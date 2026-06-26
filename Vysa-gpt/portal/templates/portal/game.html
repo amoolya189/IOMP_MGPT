@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mahabharata Runner</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #f4e4bc; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+
+<canvas id="gameCanvas"></canvas>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// GAME STATE
+let gameOver = false;
+let score = 0;
+
+// DIFFICULTY
+let baseSpeed = 5;
+let spawnRate = 1800;
+let lastSpawnTime = 0;
+
+// PLAYER (Arjuna)
+let player = {
+    x: 100,
+    y: canvas.height - 100,
+    width: 50,
+    height: 80,
+    dy: 0,
+    gravity: 0.6,
+    jump: -12,
+    jumps: 0,
+    arrowReady: true
+};
+
+let frameCount = 0;
+let arrows = [];
+
+// ENEMIES
+let enemies = [];
+const enemyTypes = [
+    { type: "king", color: "#1f3c88", crown: true, weapon: "bow" },
+    { type: "king", color: "#8b0000", crown: true, weapon: "bow" },
+    { type: "king", color: "#006400", crown: false, weapon: "bow" },
+    { type: "army", color: "#000000", crown: false, weapon: "spear" },
+    { type: "army", color: "#000000", crown: false, weapon: "spear" }
+];
+
+// DRAW PLAYER (Arjuna)
+function drawPlayer() {
+    let x = player.x;
+    let y = player.y;
+    ctx.lineWidth = 3;
+
+    const skin = "#f1c27d";
+    const robe = "#1f3c88";
+    const crown = "#d4af37";
+    const bowColor = "#8B4513";
+    const eyeColor = "#000";
+
+    let swing = Math.sin(frameCount * 0.25) * 12;
+    let bounce = Math.abs(Math.sin(frameCount * 0.25)) * 5;
+
+    // HEAD
+    ctx.fillStyle = skin;
+    ctx.beginPath();
+    ctx.arc(x + 25, y + 15 - bounce, 12, 0, Math.PI * 2);
+    ctx.fill();
+
+    // EYES
+    ctx.fillStyle = eyeColor;
+    ctx.beginPath();
+    ctx.arc(x + 20, y + 12 - bounce, 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x + 30, y + 12 - bounce, 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // CROWN
+    ctx.fillStyle = crown;
+    ctx.beginPath();
+    ctx.moveTo(x + 13, y + 5 - bounce);
+    ctx.lineTo(x + 18, y - 5 - bounce);
+    ctx.lineTo(x + 23, y + 5 - bounce);
+    ctx.lineTo(x + 28, y - 5 - bounce);
+    ctx.lineTo(x + 33, y + 5 - bounce);
+    ctx.lineTo(x + 37, y + 5 - bounce);
+    ctx.closePath();
+    ctx.fill();
+
+    // ROBE
+    ctx.fillStyle = robe;
+    ctx.beginPath();
+    ctx.moveTo(x + 15, y + 25 - bounce);
+    ctx.quadraticCurveTo(x + 25, y + 55, x + 15, y + 90);
+    ctx.lineTo(x + 35, y + 90);
+    ctx.quadraticCurveTo(x + 25, y + 55, x + 35, y + 25 - bounce);
+    ctx.closePath();
+    ctx.fill();
+
+    // ARMS (static)
+    ctx.strokeStyle = robe;
+    ctx.beginPath();
+    ctx.moveTo(x + 15, y + 50);
+    ctx.lineTo(x + 5 + swing, y + 60);
+    ctx.moveTo(x + 35, y + 50);
+    ctx.lineTo(x + 50, y + 55);
+    ctx.stroke();
+
+    // LEGS
+    ctx.beginPath();
+    ctx.moveTo(x + 20, y + 90);
+    ctx.lineTo(x + 10 + swing, y + 120);
+    ctx.moveTo(x + 30, y + 90);
+    ctx.lineTo(x + 40 - swing, y + 120);
+    ctx.stroke();
+
+    // BOW
+    ctx.strokeStyle = bowColor;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(x + 50, y + 55);
+    ctx.quadraticCurveTo(x + 70, y + 70, x + 50, y + 85);
+    ctx.stroke();
+
+    frameCount++;
+}
+
+// UPDATE PLAYER
+function updatePlayer() {
+    player.y += player.dy;
+    player.dy += player.gravity;
+    if (player.y >= canvas.height - player.height) {
+        player.y = canvas.height - player.height;
+        player.dy = 0;
+        player.jumps = 0;
+    }
+}
+
+// SHOOT ARROW
+function shootArrow() {
+    if (!player.arrowReady) return;
+    arrows.push({ x: player.x + 50, y: player.y + 55, width: 20, height: 3, speed: 12 });
+    player.arrowReady = false;
+    setTimeout(() => player.arrowReady = true, 400);
+}
+
+// DRAW ARROWS + COLLISION
+function drawArrows() {
+    ctx.fillStyle = "#555";
+    for (let i = 0; i < arrows.length; i++) {
+        let a = arrows[i];
+        ctx.fillRect(a.x, a.y, a.width, a.height);
+        a.x += a.speed;
+
+        // check collision with all enemies
+        for (let j = 0; j < enemies.length; j++) {
+            let e = enemies[j];
+            if (
+                a.x < e.x + e.width &&
+                a.x + a.width > e.x &&
+                a.y < e.y + e.height &&
+                a.y + a.height > e.y
+            ) {
+                if (e.type === "army") {
+                    // destroy army enemy
+                    enemies.splice(j, 1);
+                    score++;
+                }
+                // arrow vanishes anyway
+                arrows.splice(i, 1);
+                i--;
+                break;
+            }
+        }
+    }
+    arrows = arrows.filter(a => a.x < canvas.width);
+}
+
+// DRAW ENEMY CHARACTER
+function drawEnemy(e) {
+    let x = e.x;
+    let y = e.y;
+    let size = e.height;
+
+    ctx.lineWidth = 2;
+    const skin = "#f1c27d";
+
+    // HEAD
+    ctx.fillStyle = skin;
+    ctx.beginPath();
+    ctx.arc(x + size/4, y + size/8, size/8, 0, Math.PI*2);
+    ctx.fill();
+
+    // EYES
+    ctx.fillStyle = "#000";
+    ctx.beginPath();
+    ctx.arc(x + size/4 - 4, y + size/8, 2, 0, Math.PI*2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x + size/4 + 4, y + size/8, 2, 0, Math.PI*2);
+    ctx.fill();
+
+    // CROWN if present
+    if (e.crown) {
+        ctx.fillStyle = "#d4af37";
+        ctx.beginPath();
+        ctx.moveTo(x + size/8, y + size/16);
+        ctx.lineTo(x + size/6, y - size/16);
+        ctx.lineTo(x + size/4, y + size/16);
+        ctx.lineTo(x + size/3, y - size/16);
+        ctx.lineTo(x + 3*size/8, y + size/16);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    // BODY
+    ctx.fillStyle = e.color;
+    ctx.fillRect(x + size/8, y + size/8, size/4, size*3/4);
+
+    // ARMS
+    ctx.beginPath();
+    ctx.moveTo(x + size/8, y + size/4);
+    ctx.lineTo(x, y + size/2);
+    ctx.moveTo(x + 3*size/8, y + size/4);
+    ctx.lineTo(x + size/2, y + size/2);
+    ctx.strokeStyle = e.color;
+    ctx.stroke();
+
+    // Weapon
+    ctx.strokeStyle = e.weapon === "bow" ? "#8B4513" : "#555";
+    ctx.beginPath();
+    if (e.weapon === "bow") {
+        ctx.moveTo(x + 3*size/8, y + size/4);
+        ctx.quadraticCurveTo(x + size/2 + 10, y + size/3, x + 3*size/8, y + size/2);
+    } else if (e.weapon === "spear") {
+        ctx.moveTo(x + 3*size/8, y + size/4);
+        ctx.lineTo(x + 3*size/8, y + size/2 + 10);
+    }
+    ctx.stroke();
+}
+
+// CREATE ENEMY
+function createEnemy() {
+    let type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+    enemies.push({
+        x: canvas.width,
+        y: canvas.height - 80,
+        width: 50,
+        height: 80,
+        color: type.color,
+        crown: type.crown,
+        weapon: type.weapon,
+        type: type.type
+    });
+}
+
+// HANDLE ENEMIES + PLAYER COLLISION
+function handleEnemies() {
+    for (let i = 0; i < enemies.length; i++) {
+        let e = enemies[i];
+        e.x -= baseSpeed;
+        drawEnemy(e);
+
+        // Collision with player
+        if (
+            player.x < e.x + e.width &&
+            player.x + player.width > e.x &&
+            player.y < e.y + e.height &&
+            player.y + player.height > e.y
+        ) {
+            gameOver = true;
+        }
+
+        if (e.x + e.width < 0) {
+            enemies.splice(i, 1);
+            score++;
+            i--;
+        }
+    }
+}
+
+// SCORE
+function drawScore() {
+    ctx.fillStyle = "black";
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 20, 40);
+}
+
+// GAME OVER
+function drawGameOver() {
+    ctx.fillStyle = "black";
+    ctx.font = "40px Arial";
+    ctx.fillText("Game Over", canvas.width/2 - 120, canvas.height/2);
+    ctx.font = "20px Arial";
+    ctx.fillText("Press R to Restart", canvas.width/2 - 100, canvas.height/2 + 40);
+}
+
+// DIFFICULTY
+function updateDifficulty() {
+    if (score % 3 === 0 && score !== 0) {
+        baseSpeed += 0.01;
+        spawnRate -= 10;
+        if (spawnRate < 800) spawnRate = 800;
+        if (baseSpeed > 10) baseSpeed = 10;
+    }
+}
+
+// GAME LOOP
+function gameLoop(timestamp) {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    if (gameOver) {
+        drawGameOver();
+        return;
+    }
+
+    drawPlayer();
+    updatePlayer();
+    drawArrows();
+    handleEnemies();
+    drawScore();
+    updateDifficulty();
+
+    if (timestamp - lastSpawnTime > spawnRate + Math.random()*500) {
+        createEnemy();
+        lastSpawnTime = timestamp;
+    }
+
+    requestAnimationFrame(gameLoop);
+}
+
+// CONTROLS
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space" && player.jumps < 5) {
+        player.dy = player.jump;
+        player.jumps++;
+    }
+    if (e.code === "ArrowUp") shootArrow();
+    if (e.code === "KeyR" && gameOver) restartGame();
+});
+
+// RESET
+function restartGame() {
+    gameOver = false;
+    score = 0;
+    enemies = [];
+    arrows = [];
+    baseSpeed = 5;
+    spawnRate = 1800;
+    player.y = canvas.height - player.height;
+    player.dy = 0;
+    player.jumps = 0;
+    gameLoop(0);
+}
+
+// START
+gameLoop(0);
+
+</script>
+
+</body>
+</html>
