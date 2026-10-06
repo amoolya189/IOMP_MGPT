@@ -1,4 +1,4 @@
-iomp successfully execute and completed
+iomp successfully executed and completed
 #go to the folder
 #activate test
 #then install all modules
